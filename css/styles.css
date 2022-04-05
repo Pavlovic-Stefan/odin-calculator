@@ -18,7 +18,7 @@ body > div {
 
 .screen {
     border: 2px solid black;
-    width: 400px;
+    width: 396px;
     height: 60px;
     display: flex;
     flex-direction: column;
@@ -44,3 +44,22 @@ body > div {
     font-size: 24px;
 }
 
+.buttons {
+    width: 396px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.numbers {
+    width: fit-content;
+    margin: 16px;
+}
+
+.numbers > div > button {
+    width: 54px;
+    height: 54px;
+    font-size: 32px;
+    padding: 6px 16px;
+    margin: 2px 0px;
+}
