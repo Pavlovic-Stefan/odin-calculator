@@ -56,9 +56,9 @@ let equalsCheck = false;
 const resultDisplay = document.querySelector('.result');
 //
 function calculatorDisplay(toDisplay){
-    if (resultDisplay.textContent == number1){resultDisplay.textContent = 0}
+    if (resultDisplay.textContent == number1){resultDisplay.textContent = 0};
     // if it contains 0 and doesn't contain '.', empty display, else do nothing
-    (resultDisplay.textContent == 0 && !resultDisplay.textContent.includes('.')) ? resultDisplay.textContent = '' : null ;
+    (resultDisplay.textContent == 0 && !resultDisplay.textContent.includes('.')) ? resultDisplay.textContent = '' : null;
     // if it's empty and input is '.', add a 0, else do nothing
     (resultDisplay.textContent == '' && toDisplay == '.') ? resultDisplay.textContent += 0 : null ;
     // if input is '.' and there already exists a '.', don't add anything, else add to display
