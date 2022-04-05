@@ -17,7 +17,7 @@ body > div {
 }
 
 .screen {
-    border: 2px solid black;
+    border: 2px solid rgb(99, 99, 99);
     width: 396px;
     height: 60px;
     display: flex;
@@ -45,21 +45,35 @@ body > div {
 }
 
 .buttons {
-    width: 396px;
-    border: 2px solid black;
+    min-width: 396px;
+    width: fit-content;
+    border: 2px solid rgb(99, 99, 99);
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
 }
 
-.numbers {
+.numbers, .operators {
     width: fit-content;
     margin: 16px;
 }
 
-.numbers > div > button {
+.operators {
+    display: flex;
+}
+
+.operators > div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2px;
+}
+
+.numbers > div > button, .operators > div > button {
     width: 54px;
     height: 54px;
     font-size: 32px;
     padding: 6px 16px;
     margin: 2px 0px;
 }
+
+
