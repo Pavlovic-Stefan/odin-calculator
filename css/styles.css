@@ -3,3 +3,44 @@
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+
+body {
+    background-color: rgb(233, 233, 233);
+}
+
+body > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.screen {
+    border: 2px solid black;
+    width: 400px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 8px;
+}
+
+.screen > div {
+    margin-right: 8px;
+}
+
+.past {
+    color:rgb(128, 128, 128);
+    font-size: 16px;
+}
+
+.result {
+    color: rgb(32, 32, 32);
+    font-size: 24px;
+}
+
