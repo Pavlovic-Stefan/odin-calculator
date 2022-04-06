@@ -15,84 +15,96 @@ function multiply(num1, num2){
 function divide(num1, num2){
     return Number(num1)/Number(num2);
 }
-// result
-function equals(){
-    number2 = resultDisplay.textContent;
-    result = operate(number1, number2, operator);
-    pastDisplay.textContent = `${number1} ${opSign} ${number2} =`;
-    resultDisplay.textContent = result;
-    number1 = result;
-    equalsCheck = true;
-    number2 = 0;
-    result = 0;
-    operator = 'add';
-
-}
-// clear
-function clear(){
-    number1 = 0;
-    operator = 'add';
-    number2 = 0;
-    result = 0;
-    opSign = '+';
-    equalsCheck = false;
-    resultDisplay.textContent = 0;
-    pastDisplay.textContent = 0;
-}
-
-//
+// operate
 function operate(num1, num2 ,operator){
     return window[operator](num1, num2);
 }
-
-let number1 = 0;
-let operator = 'add';
-let number2 = 0;
-let result = 0;
-let opSign = '+';
-let equalsCheck = false;
-
-
-const resultDisplay = document.querySelector('.result');
-//
-function calculatorDisplay(toDisplay){
-    if (resultDisplay.textContent == number1){resultDisplay.textContent = 0};
-    // if it contains 0 and doesn't contain '.', empty display, else do nothing
-    (resultDisplay.textContent == 0 && !resultDisplay.textContent.includes('.')) ? resultDisplay.textContent = '' : null;
-    // if it's empty and input is '.', add a 0, else do nothing
-    (resultDisplay.textContent == '' && toDisplay == '.') ? resultDisplay.textContent += 0 : null ;
-    // if input is '.' and there already exists a '.', don't add anything, else add to display
-    (toDisplay == '.' && resultDisplay.textContent.includes('.')) ? null : resultDisplay.textContent += toDisplay;
+// clear
+function clear(){
+    pastScreen.textContent = 0;
+    resultScreen.textContent = 0;
+    sign = 'add';
+    clearQuestion = true;
 }
-
-const numberButtons = document.querySelectorAll('.number');
-numberButtons.forEach(button=>button.addEventListener('click', ()=>calculatorDisplay(button.textContent)));
-
-const pastDisplay = document.querySelector('.past');
-
-
-// 12 + 7 - 5 * 3 = 42
-const operatorButtons = document.querySelectorAll('.opera > button');
-operatorButtons.forEach(button=>button.addEventListener('click', () => {
-    if (equalsCheck){
-        equalsCheck = false;
-        number2 = 0;
-        result = operate(number1, number2, operator);
-        pastDisplay.textContent = `${result} ${button.textContent}`
-        operator = button.classList.value;
-        opSign = button.textContent;
-        resultDisplay.textContent = result;
-        number1 = result;
-        return;
-    }
-    number2 = resultDisplay.textContent;
-    result = operate(number1, number2, operator);
-    pastDisplay.textContent = `${result} ${button.textContent}`
-    operator = button.classList.value;
-    opSign = button.textContent;
-    resultDisplay.textContent = result;
-    number1 = result;
-} ));
-
+// update result screen
+function addToDisplay(numberToDisplay){
+    // resultScreen.textContent == 0 ? resultScreen.textContent = '' : null;
+    resultScreen.textContent += numberToDisplay;
+}
+// clear result screen 
+function clearResultScreen(){
+    resultScreen.textContent = '';
+}
+// Div that displays last number and operator
+const pastScreen = document.querySelector('.past');
+// Div that displays current user input and last result
+const resultScreen = document.querySelector('.result');
+// Equals
 const equalsButton = document.querySelector('.equals');
-equalsButton.addEventListener('click', ()=> equals());
+// Separator
+const separator = document.querySelector('.separator');
+// Clear
+const clearButton = document.querySelector(".clear");
+// Backspace
+const undoButton = document.querySelector(".backspace");
+// Numpad
+const numberButtons = document.querySelectorAll('.number');
+// Operators
+const operatorButtons = document.querySelectorAll('.opera > button');
+// sign
+let sign = 'add'
+// to clear or not to clear
+let clearQuestion = true;
+
+// addEventListener
+
+// on click add number to resultDisplay
+numberButtons.forEach(button => button.addEventListener('click', () => {
+    if (clearQuestion) {
+        clearQuestion = false;
+        clearResultScreen();
+    }
+    addToDisplay(button.textContent);
+}));
+
+// on click, operate on last 2 numbers, set resultDisplay to result
+operatorButtons.forEach(button => button.addEventListener('click', ()=>{
+    if (clearQuestion) {
+        pastScreen.textContent = `${resultScreen.textContent} ${button.textContent} `;
+        sign = button.classList.value;
+        return
+    };
+    let result = operate(pastScreen.textContent.split(' ')[0], resultScreen.textContent, sign);
+    pastScreen.textContent = `${result} ${button.textContent} `;
+    resultScreen.textContent = result;
+    sign = button.classList.value;
+    clearQuestion = true;
+}));
+
+// on click do math
+equalsButton.addEventListener('click', ()=>{
+    result = operate(pastScreen.textContent.split(' ')[0], resultScreen.textContent, sign);
+    pastScreen.textContent = `${pastScreen.textContent} ${resultScreen.textContent} =`
+    resultScreen.textContent = result;
+    clearQuestion = true;
+});
+
+// add separator
+separator.addEventListener('click', () => {
+    if (!resultScreen.textContent.includes('.')){
+        resultScreen.textContent += '.';
+        clearQuestion=false;
+    }
+})
+
+// on click clear
+clearButton.addEventListener('click', () => clear());
+
+// remove last number from result screen
+undoButton.addEventListener('click', () => {
+    resultScreen.textContent = resultScreen.textContent.slice(0, -1);
+    if (resultScreen.textContent == ''){
+        resultScreen.textContent = 0;
+        clearQuestion=true;
+    }
+})

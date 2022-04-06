@@ -18,7 +18,7 @@ body > div {
 
 .screen {
     border: 2px solid rgb(99, 99, 99);
-    width: 396px;
+    width: 296px;
     height: 60px;
     display: flex;
     flex-direction: column;
@@ -45,10 +45,26 @@ body > div {
 }
 
 .buttons {
-    min-width: 396px;
+    min-width: 296px;
     width: fit-content;
     border: 2px solid rgb(99, 99, 99);
     border-radius: 8px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+}
+
+.controls > button {
+    width: 112px;
+    height: 54px;
+    font-size: 24px;
+    margin: 0px 2px -16px 0;
+}
+
+.buttons > .containers {
     display: flex;
     justify-content: space-between;
 }
@@ -76,4 +92,40 @@ body > div {
     margin: 2px 0px;
 }
 
+.clear {
+    background-color: rgb(161, 55, 55);
+    border-radius: 4px;
+}
 
+.backspace {
+    background-color: rgb(103, 161, 55);
+    border-radius: 4px;
+}
+
+.opera > button {
+    background-color: rgba(55, 89, 161, 0.301);
+    border-radius: 4px;
+}
+
+.buttons {
+    margin-top: 16px;
+}
+
+.clear, .backspace, .opera > button {
+    border: 1px solid rgb(68, 68, 68);
+}
+
+.clear:hover{
+    background-color: rgb(116, 39, 39);
+    border-radius: 4px;
+}
+.backspace:hover{
+    background-color: rgb(68, 107, 36);
+    border-radius: 4px;
+    
+}
+.opera > button:hover {
+    background-color: rgba(36, 60, 110, 0.301);
+    border-radius: 4px;
+
+}
